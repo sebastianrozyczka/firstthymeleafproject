@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Product Adding</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+<div class="container-md">
+    <div class="mx-auto" style="width: 300px;">
+        <h1 class="display-6" th:text="|Add product|"><b></b></h1><br/>
+    </div>
+    <form class="row g-3 needs-validation" action="/add" method="post" th:object="${product}">
+        <div style="height: auto">
+            <label for="name" class="form-label">Name</label>
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="name" placeholder="Enter product name" th:field="*{name}"/>
+            </div>
+        </div>
+        <div style="height: auto">
+            <label for="price" class="form-label">Price</label>
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="price" placeholder="Enter product price"
+                       th:field="*{price}"/>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="categories" class="form-label">Category</label>
+            <select id="categories" class="form-select" required th:field="*{category}">
+                <option value="" selected disabled>Choose...</option>
+                <option value="GROCERIES">Groceries</option>
+                <option value="HOUSEHOLD_ITEMS">Household items</option>
+                <option value="OTHER">Other</option>
+            </select>
+        </div>
+        <div style="height: auto" class="col-12">
+            <button class="btn btn-primary" type="submit">Add product</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
