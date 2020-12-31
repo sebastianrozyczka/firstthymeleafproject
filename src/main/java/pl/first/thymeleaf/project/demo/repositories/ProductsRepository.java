@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 @Repository
 public class ProductsRepository {
-    List<Product> products = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 
     ProductsRepository() {
         products.add(new Product("MountainDew", 2.5, Category.GROCERIES));
@@ -22,9 +22,9 @@ public class ProductsRepository {
         return products;
     }
 
-    public List<Product> getByCategory(String category) {
+    public List<Product> getByCategory(Category category) {
         return products.stream()
-                .filter(product -> product.getCategory().getPath().equals(category))
+                .filter(product -> product.getCategory().toString().equalsIgnoreCase(category.toString()))
                 .collect(Collectors.toList());
     }
 

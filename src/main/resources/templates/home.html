@@ -21,7 +21,7 @@
                 <a th:text="|All products list|" th:href="'/products'"></a>
             </li>
             <li th:each="category: ${categories}">
-                <a th:text="|${category.getName()} list|" th:href="|/products/${category.getPath()}|"></a>
+                <a th:text="|${category.getName()} list|" th:href="|/products/${category}|"></a>
             </li>
         </ul>
     </div>

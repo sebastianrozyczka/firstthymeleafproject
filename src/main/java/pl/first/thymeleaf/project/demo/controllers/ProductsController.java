@@ -3,6 +3,7 @@ package pl.first.thymeleaf.project.demo.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.first.thymeleaf.project.demo.model.Category;
 import pl.first.thymeleaf.project.demo.model.Product;
 import pl.first.thymeleaf.project.demo.repositories.ProductsRepository;
 
@@ -16,25 +17,25 @@ public class ProductsController {
         this.productsRepository = productsRepository;
     }
 
-    List<Product> products;
-
     @GetMapping({"/products", "/products/{category}"})
-    public String productsAndAmount(@PathVariable(required = false, name = "category") String category, Model model) {
-        if (category == null || category.isEmpty()) {
+    public String productsAndAmount(@PathVariable(required = false) Category category, Model model) {
+        List<Product> products;
+        if (category == null) {
             products = productsRepository.getAll();
         } else {
             products = productsRepository.getByCategory(category);
         }
-        calculateSumOfPrices(model);
+        calculateSumOfPrices(products, model);
         model.addAttribute("products", products);
         return "products";
     }
 
-    private void calculateSumOfPrices(Model model) {
-        double sum = 0;
-        for (Product product : products) {
-            sum += product.getPrice();
-        }
+    private void calculateSumOfPrices(List<Product> products, Model model) {
+        double sum = products.stream()
+                .map(Product::getPrice)
+                .reduce(Double::sum)
+                .get();
+
         model.addAttribute("sum", sum);
     }
 
