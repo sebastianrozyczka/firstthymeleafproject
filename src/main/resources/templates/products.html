@@ -24,12 +24,12 @@
         <tr th:each="product, iter : ${products}">
             <th scope="row" th:text="${iter.count}"></th>
             <td th:text="${product.name}"></td>
-            <td th:text="|${#numbers.formatDecimal(product.price, 0, 'WHITESPACE', 2, 'COMMA')} PLN|"></td>
+            <td th:text="|${#numbers.formatCurrency(product.price)} PLN|"></td>
             <td th:text="${product.category.getName()}"></td>
         </tr>
         </tbody>
     </table>
-    <b th:text="|Sum of prices: ${#numbers.formatDecimal(sum, 0, 'WHITESPACE', 2, 'COMMA')} zł|"></b>
+    <b th:text="|Sum of prices: ${#numbers.formatCurrency(sum)} PLN|"></b>
 </div>
 </body>
 </html>

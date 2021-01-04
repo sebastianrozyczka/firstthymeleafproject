@@ -33,8 +33,7 @@ public class ProductsController {
     private void calculateSumOfPrices(List<Product> products, Model model) {
         double sum = products.stream()
                 .map(Product::getPrice)
-                .reduce(Double::sum)
-                .get();
+                .reduce(0.0, Double::sum);
 
         model.addAttribute("sum", sum);
     }
