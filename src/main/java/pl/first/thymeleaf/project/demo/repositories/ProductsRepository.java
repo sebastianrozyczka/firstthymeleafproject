@@ -24,7 +24,7 @@ public class ProductsRepository {
 
     public List<Product> getByCategory(Category category) {
         return products.stream()
-                .filter(product -> product.getCategory().toString().equalsIgnoreCase(category.toString()))
+                .filter(product -> product.getCategory() == category)
                 .collect(Collectors.toList());
     }
 
